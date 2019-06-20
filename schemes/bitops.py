@@ -1,4 +1,5 @@
 import random
+import os
 
 def readMediaFile(mediaFile):
     fo = open(mediaFile, "rb")
@@ -72,7 +73,8 @@ def bitOpsEncrypt(mediaFile):
         image[idx] = b ^ key
 
     # open a new file to store the encrypted file
-    encryptedFilepath = mediaFile[:-4] + "_encrypted" + mediaFile[-4:]
+  #  encryptedFilepath = mediaFile[:-4] + "_encrypted" + mediaFile[-4:]
+    encryptedFilepath = os.getcwd() + "/encrypted" + mediaFile[-4:]
     fo = open(encryptedFilepath, "wb") # -4 might change depending on file extension
     fo.write(infoBitstream + image)
     fo.close()
@@ -110,7 +112,8 @@ def bitOpsDecrypt(encryptedFile):
         encryptedMedia[idx] = b ^ key
 
     # open a new file to store the decrypted file
-    decrypted_filepath = encryptedFile[:-13] + "decrypted" + encryptedFile[-4:]
+  #  decrypted_filepath = encryptedFile[:-13] + "decrypted" + encryptedFile[-4:]
+    decrypted_filepath = os.getcwd() + "/decrypted" + encryptedFile[-4:]
     fo = open(decrypted_filepath, "wb")
     fo.write(encryptedMedia)
     fo.close()
@@ -139,3 +142,5 @@ if __name__ == "__main__":
 
     # myDecryptedFile = bitOpsDecrypt(myEncryptedFile)
     # print("Saved Decrypted file to: " + myDecryptedFile)
+
+    # TODO fix file path (option to specify output file path)
